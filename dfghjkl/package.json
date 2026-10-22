@@ -1,0 +1,22 @@
+{
+  "name": "soul-radiology-erp",
+  "version": "1.0.0",
+  "description": "SOUL Clinical AI & Radiology ERP Portal",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'No build step required for static assets'"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "radiology",
+    "erp",
+    "healthcare",
+    "ai"
+  ],
+  "author": "SOUL Healthcare",
+  "license": "UNLICENSED"
+}

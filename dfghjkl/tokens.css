@@ -1,0 +1,68 @@
+/* SOUL Radiology Brand System - Design Tokens
+   Preserving exact hex values and metrics from the Brand & UI Kit specification */
+
+:root {
+  /* Brand Colours */
+  --color-brand-navy: #17365D;
+  --color-brand-navy-hover: #122b4a;
+  --color-brand-teal: #13836B;
+  --color-brand-teal-hover: #0f6c58;
+  --color-brand-saffron: #F3A536;
+  --color-brand-saffron-hover: #dc922c;
+
+  /* Typography & Text */
+  --color-text-primary: #1F2937;
+  --color-text-muted: #5B6573;
+  --color-text-light: #667085;
+  --color-text-inverse: #FFFFFF;
+
+  /* Surfaces & Backgrounds */
+  --color-surface-page: #F5F7FA;
+  --color-surface-card: #FFFFFF;
+  --color-border-default: #D9E1EA;
+  --color-border-focus: #17365D;
+
+  /* Soft Tint Surfaces */
+  --color-surface-teal-soft: #E8F5F1;
+  --color-surface-blue-soft: #EAF0F8;
+  --color-surface-amber-soft: #FFF5E3;
+
+  /* Status Tokens */
+  --color-status-error: #B42318;
+  --color-status-error-bg: #FEE4E2;
+  --color-status-error-border: #FECDCA;
+  --color-status-success: #16794B;
+  --color-status-success-bg: #E6F4EA;
+  --color-status-success-border: #A3D9B8;
+  --color-status-info: #17365D;
+  --color-status-info-bg: #EAF0F8;
+
+  /* Shape & Radii */
+  --radius-sm: 4px;
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-pill: 9999px;
+
+  /* Spacing Scale (4, 8, 12, 16, 24, 32, 40, 48px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Layout */
+  --content-max-width: 1200px;
+  --navbar-height: 68px;
+
+  /* Shadows (Subtle / Minimal as per brand kit) */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-card: 0 2px 6px rgba(23, 54, 93, 0.06);
+  --shadow-dropdown: 0 10px 25px -5px rgba(23, 54, 93, 0.12), 0 8px 10px -6px rgba(23, 54, 93, 0.08);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --line-height-body: 1.55;
+}

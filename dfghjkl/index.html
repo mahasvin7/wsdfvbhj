@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOUL Radiology</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#app-root">Skip to main content</a>
+
+  <!-- Tricolour strip + accessibility tools -->
+  <div class="gov-strip" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="a11y-bar no-print" role="region" aria-label="Accessibility tools">
+    <div class="a11y-inner">
+      <span class="a11y-note">Fictional prototype · Not a diagnostic service</span>
+      <div class="a11y-tools">
+        <div class="a11y-group" role="group" aria-label="Text size">
+          <button type="button" data-fs="sm" aria-label="Smaller text" aria-pressed="false">A-</button>
+          <button type="button" data-fs="base" aria-label="Normal text" aria-pressed="true">A</button>
+          <button type="button" data-fs="lg" aria-label="Larger text" aria-pressed="false">A+</button>
+        </div>
+        <button type="button" class="a11y-btn" id="btn-contrast" aria-pressed="false">High contrast</button>
+        <label class="a11y-lang">
+          <span class="sr-only">Language</span>
+          <select id="lang-select">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="kn">ಕನ್ನಡ (demo)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Main Application Header / Navbar
+       Features SOUL Wordmark & User Profile at Top Right Corner
+       ========================================================================= -->
+  <header class="main-navbar" role="banner">
+    <div class="navbar-inner">
+      <!-- Wordmark Direction from Brand Kit: SOUL in navy, Radiology in teal -->
+      <a href="javascript:void(0)" class="brand-wordmark" id="nav-brand-logo" title="SOUL Radiology">
+        <div class="brand-icon" aria-hidden="true">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="brand-text">
+          <span class="part-navy">SOUL</span>
+          <span class="part-teal">Radiology</span>
+        </div>
+      </a>
+
+      <!-- Home Page Filter Tabs -->
+      <nav class="nav-links" id="main-nav-links" style="display: flex;" aria-label="Main Navigation">
+        <button class="nav-link-btn active" data-filter="all">Home</button>
+        <button class="nav-link-btn" data-page="upload">Upload</button>
+        <button class="nav-link-btn" data-page="scan">Scan Viewer</button>
+      </nav>
+
+      <!-- Right Side: USER PROFILE IN TOP RIGHT CORNER -->
+      <div class="navbar-right">
+        <!-- User Profile Pill & Dropdown -->
+        <div id="nav-auth-controls" style="display: flex; align-items: center; gap: 12px;">
+          <div class="user-profile-wrapper" id="user-profile-dropdown-container">
+            <button class="user-profile-pill" id="user-profile-trigger" aria-expanded="false"
+              aria-controls="user-profile-menu" aria-label="Account menu">
+              <div class="user-avatar-circle" id="nav-user-avatar" style="background-color: var(--color-brand-teal);">
+                AP
+              </div>
+              <div class="user-meta-compact">
+                <span class="user-meta-name" id="nav-user-name">Aarav Patel</span>
+                <span class="user-meta-handle" id="nav-user-handle">@aarav_p</span>
+              </div>
+              <span class="profile-chevron" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+
+            <!-- Profile Dropdown Content -->
+            <div class="profile-dropdown-menu" id="user-profile-menu">
+              <div class="dropdown-header">
+                <div class="user-avatar-circle" id="menu-avatar"
+                  style="width: 44px; height: 44px; font-size: 1rem; background-color: var(--color-brand-teal);">
+                  AP
+                </div>
+                <div class="dropdown-user-info">
+                  <div class="dropdown-user-name" id="menu-user-name">Aarav Patel</div>
+                  <div class="dropdown-user-email" id="menu-user-email">aarav.patel@example.com</div>
+                  <span class="dropdown-role-pill" id="menu-user-id">SOUL-UID-1042</span>
+                </div>
+              </div>
+
+              <div class="dropdown-body">
+                <ul class="profile-meta-list">
+                  <li class="profile-meta-item">
+                    <span class="profile-meta-label">Username</span>
+                    <span class="profile-meta-val" id="menu-username">@aarav_p</span>
+                  </li>
+                  <li class="profile-meta-item">
+                    <span class="profile-meta-label">Birthday</span>
+                    <span class="profile-meta-val" id="menu-dob">1995-04-12</span>
+                  </li>
+                  <li class="profile-meta-item">
+                    <span class="profile-meta-label">Gender</span>
+                    <span class="profile-meta-val" id="menu-gender">Male</span>
+                  </li>
+                  <li class="profile-meta-item">
+                    <span class="profile-meta-label">Mobile</span>
+                    <span class="profile-meta-val" id="menu-mobile">+91 98765 43210</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Main Content Container
+       ========================================================================= -->
+  <main class="app-container" id="app-root" tabindex="-1">
+
+    <!-- =======================================================================
+         VIEW 1: AUTHENTICATION FLOW (User Login & 2-Card Sign Up)
+         ======================================================================= -->
+    <!-- LANDING (logged-out start page) -->
+    <section id="view-landing" class="landing" style="display: none;" aria-labelledby="landing-title">
+      <h1 class="landing-title" id="landing-title"><span class="part-navy">SOUL</span> <span
+          class="part-teal">Radiology</span></h1>
+      <p class="landing-text">Makes written radiology reports easier to understand.</p>
+      <p class="sample-notice landing-notice" role="note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Prototype demo with fictional sample reports and predefined results. Not a diagnostic service or for
+          medical decisions. Discuss real reports with a qualified healthcare professional.</span>
+      </p>
+      <button type="button" class="btn btn-primary btn-lg" id="btn-explore-samples">Explore Samples</button>
+
+      <ol class="steps" aria-label="How it works">
+        <li><span class="step-num">1</span><span>Pick a sample report</span></li>
+        <li><span class="step-num">2</span><span>See the key findings</span></li>
+        <li><span class="step-num">3</span><span>Read it in simple words</span></li>
+        <li><span class="step-num">4</span><span>Talk to your doctor</span></li>
+      </ol>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 2: USER HOME / DEMO PAGE
+         Clean, card-based interface with synthetic radiology reports and
+         matching analyses. User profile is in the top-right corner of navbar!
+         ======================================================================= -->
+    <section id="view-dashboard">
+
+      <!-- Welcome + primary action -->
+      <div class="home-hero-header">
+        <div>
+          <h1 class="page-title" id="dash-welcome-text">Explore Sample Reports</h1>
+          <p class="text-muted home-hero-sub">Choose a sample to read it in plain language.</p>
+        </div>
+      </div>
+
+      <!-- Safety notice -->
+      <div class="sample-notice" role="note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Prototype demo: fictional samples with predefined results. Not for medical decisions.</span>
+      </div>
+
+      <!-- Quick Category Filter Bar -->
+      <div class="category-filter-bar">
+        <div class="category-pills" id="sample-category-filters" role="group" aria-label="Filter samples by body area">
+          <button class="filter-chip active" data-region="all" aria-pressed="true">All</button>
+          <button class="filter-chip" data-region="Thorax" aria-pressed="false">Chest</button>
+          <button class="filter-chip" data-region="Brain" aria-pressed="false">Head</button>
+          <button class="filter-chip" data-region="Abdomen" aria-pressed="false">Abdomen</button>
+          <button class="filter-chip" data-region="Knee" aria-pressed="false">Knee</button>
+        </div>
+        <div class="search-mini-wrap">
+          <input type="search" id="report-search-input" class="search-input" placeholder="Search reports"
+            aria-label="Search reports">
+        </div>
+      </div>
+
+      <!-- Grid of Synthetic Radiology Report Cards (Clean & Not Texty) -->
+      <div class="reports-grid" id="reports-grid-container">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+    </section>
+
+    <!-- UPLOAD -->
+    <section id="view-upload" style="display: none;" aria-labelledby="upload-title">
+      <h1 class="page-title" id="upload-title">Upload a Report</h1>
+      <p class="text-muted home-hero-sub">Add a text report or a scan image. Files stay in your browser and are not sent
+        anywhere.</p>
+
+      <div class="upload-drop" id="upload-drop" tabindex="0" role="button" aria-label="Choose a file, or drop one here">
+        <strong>Drop a file here</strong>
+        <span class="text-muted">or</span>
+        <button type="button" class="btn btn-primary" id="btn-browse">Choose file</button>
+        <small class="text-muted">TXT, PDF, DOCX or image (PNG, JPG) · up to 25 MB</small>
+        <input type="file" id="upload-input" hidden accept=".txt,.md,.pdf,.docx,image/*">
+      </div>
+
+      <div class="upload-samples">
+        <span class="text-muted">Or try a sample:</span>
+        <div class="upload-sample-btns" id="upload-sample-btns"></div>
+      </div>
+
+      <div id="upload-result" aria-live="polite"></div>
+    </section>
+
+    <!-- VIEW 3: SINGLE REPORT (filled by showReportView in app.js) -->
+    <section id="view-report" class="report-view" style="display: none;">
+      <div id="report-view-body"></div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="app-toast" role="status" aria-live="polite">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-text">Success</span>
+  </div>
+
+  <!-- Scan Viewer (display only) -->
+  <div class="scan-backdrop no-print" id="scan-modal" hidden>
+    <div class="scan-card" role="dialog" aria-modal="true" aria-labelledby="scan-title">
+      <div class="scan-head">
+        <h2 class="section-title" id="scan-title">Scan Viewer</h2>
+        <button type="button" class="btn btn-ghost" id="scan-close">Close</button>
+      </div>
+      <p class="sample-notice report-notice" role="note">Display only. This is a simple illustration, not a real scan.
+        Not for diagnosis.</p>
+      <div class="scan-stage">
+        <div class="scan-canvas" id="scan-canvas"></div>
+      </div>
+      <div class="scan-controls">
+        <button type="button" class="btn btn-secondary" id="scan-zoom-out" aria-label="Zoom out">−</button>
+        <span class="scan-zoom-label" id="scan-zoom-label" aria-live="polite">100%</span>
+        <button type="button" class="btn btn-secondary" id="scan-zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" class="btn btn-secondary" id="scan-invert" aria-pressed="false">Invert</button>
+        <button type="button" class="btn btn-ghost" id="scan-reset">Reset</button>
+      </div>
+      <p class="muted-note" id="scan-caption"></p>
+    </div>
+  </div>
+
+  <!-- Ask AI Assistant Modal -->
+  <div class="ai-modal-backdrop no-print" id="ai-modal" hidden>
+    <div class="ai-modal-card" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
+      <div class="ai-modal-header">
+        <div class="ai-title-wrap">
+          <span class="ai-header-badge">✨ SOUL AI</span>
+          <h2 class="ai-modal-title" id="ai-modal-title">Clinical AI Assistant</h2>
+        </div>
+        <button type="button" class="btn btn-ghost" id="ai-modal-close" aria-label="Close AI Assistant">✕</button>
+      </div>
+
+      <div class="ai-report-context" id="ai-report-context">
+        <span id="ai-context-text">Analyzing active report</span>
+        <span class="badge" style="background:#EAF0F8; color:#17365D; font-weight:600; padding:2px 8px; border-radius:4px; font-size:0.75rem;" id="ai-context-badge">Report Loaded</span>
+      </div>
+
+      <!-- Quick Prompt Options -->
+      <div class="ai-prompt-options" id="ai-prompt-options">
+        <div class="ai-options-label">Suggested Inquiries:</div>
+        <div class="ai-pills-row">
+          <button type="button" class="ai-pill-btn active-pill" data-ai-query="early-detection">
+            <span class="pill-icon">🔬</span>
+            <strong>Early Detection of Disease</strong>
+            <span class="pill-badge">Primary Option</span>
+          </button>
+          <button type="button" class="ai-pill-btn" data-ai-query="summary">
+            <span class="pill-icon">📋</span> Simple Summary
+          </button>
+          <button type="button" class="ai-pill-btn" data-ai-query="doctor-questions">
+            <span class="pill-icon">🩺</span> Questions for Doctor
+          </button>
+          <button type="button" class="ai-pill-btn" data-ai-query="risks">
+            <span class="pill-icon">⚠️</span> Critical Review
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat / Conversation History -->
+      <div class="ai-chat-thread" id="ai-chat-thread" role="log" aria-live="polite">
+        <!-- AI messages rendered here -->
+      </div>
+
+      <!-- Ask AI Input Form -->
+      <form class="ai-input-form" id="ai-input-form">
+        <input type="text" class="ai-input-box" id="ai-input-box" 
+          placeholder="Ask AI about this report (e.g. 'What is the early detection for this disease?')..."
+          autocomplete="off">
+        <button type="submit" class="btn btn-primary ai-send-btn" id="ai-send-btn">
+          <span>Ask</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+
+      <div class="ai-modal-footer">
+        <span class="muted-note small">AI answers are for educational & demonstration purposes only. Consult a qualified healthcare professional for medical diagnosis.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer no-print" role="contentinfo">
+    <div class="gov-strip" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="footer-inner">
+      <div><strong>SOUL Radiology</strong> · Prototype</div>
+      <div class="footer-links" id="footer-links">
+        <button type="button" class="footer-link" data-page="home">Samples</button>
+        <button type="button" class="footer-link" data-page="upload">Upload</button>
+      </div>
+      <div>Fictional samples · Demonstration only · Not medical advice</div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
